@@ -1,0 +1,934 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#B71C2C">
+
+    <title>Petualangan Sanak Digital | Tim Bedelau</title>
+
+    <meta name="description" content="Aplikasi pendataan peserta dan dokumentasi Misi Petualangan Sanak Digital Tim Bedelau Bank Indonesia Provinsi Riau.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==============================
+         SIDEBAR
+    =============================== -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                <i class="fa-solid fa-landmark"></i>
+            </div>
+
+            <div class="brand-text">
+                <h2>Sanak Digital</h2>
+                <span>Tim Bedelau</span>
+            </div>
+
+            <button class="sidebar-close" id="sidebarClose" aria-label="Tutup menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="sidebar-label">MENU UTAMA</div>
+
+        <nav class="sidebar-nav">
+
+            <a href="#dashboard" class="nav-link active" data-page="dashboard">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#tambah-peserta" class="nav-link" data-page="tambah-peserta">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Tambah Peserta</span>
+            </a>
+
+            <a href="#data-peserta" class="nav-link" data-page="data-peserta">
+                <i class="fa-solid fa-users"></i>
+                <span>Data Peserta</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="sidebar-label">INFORMASI</div>
+
+        <nav class="sidebar-nav">
+
+            <a href="#tentang" class="nav-link" data-page="tentang">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Tentang Aplikasi</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <div class="footer-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div>
+                <strong>Tim Bedelau</strong>
+                <span>Petualangan Sanak Digital</span>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- SIDEBAR OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+    <!-- ==============================
+         MAIN CONTENT
+    =============================== -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="breadcrumb">
+                    <span>Petualangan Sanak Digital</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <strong id="breadcrumbCurrent">Dashboard</strong>
+                </div>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="event-badge">
+                    <span class="status-dot"></span>
+                    Sistem Pendataan
+                </div>
+
+                <div class="user-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ==============================
+             PAGE: DASHBOARD
+        =============================== -->
+        <section class="page active" id="page-dashboard">
+
+            <div class="welcome-section">
+
+                <div>
+                    <span class="section-eyebrow">
+                        <i class="fa-solid fa-sparkles"></i>
+                        SELAMAT DATANG, TIM BEDELAU
+                    </span>
+
+                    <h1>Dashboard <span>Sanak Digital.</span></h1>
+
+                    <p>
+                        Kelola data peserta dan dokumentasikan setiap
+                        kegiatan misi Petualangan Sanak Digital.
+                    </p>
+                </div>
+
+                <button class="btn-primary" data-action="tambah-peserta">
+                    <i class="fa-solid fa-plus"></i>
+                    Tambah Peserta
+                </button>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon red">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <div class="stat-info">
+                        <span>Total Peserta</span>
+                        <h2 id="totalPeserta">0</h2>
+                        <small>Peserta terdata</small>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+
+                    <div class="stat-info">
+                        <span>Data Lengkap</span>
+                        <h2 id="dataLengkap">0</h2>
+                        <small>Dokumentasi lengkap</small>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+
+                    <div class="stat-info">
+                        <span>Dokumentasi</span>
+                        <h2 id="totalDokumentasi">0</h2>
+                        <small>Foto tersimpan</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK ACTION -->
+            <div class="content-card quick-action-card">
+
+                <div class="card-heading">
+                    <div>
+                        <h3>Mulai Pendataan</h3>
+                        <p>Tambahkan peserta baru untuk mendokumentasikan pelaksanaan misi.</p>
+                    </div>
+
+                    <div class="heading-icon">
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                    </div>
+                </div>
+
+                <div class="quick-action-content">
+
+                    <div class="quick-action-description">
+                        <div class="quick-action-icon">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+
+                        <div>
+                            <strong>Formulir Data Peserta</strong>
+                            <p>
+                                Isi identitas peserta dan unggah lima
+                                dokumentasi kegiatan misi QRIS.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary" data-action="tambah-peserta">
+                        Mulai Mengisi
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECENT DATA -->
+            <div class="content-card">
+
+                <div class="card-heading">
+
+                    <div>
+                        <h3>Peserta Terbaru</h3>
+                        <p>Daftar peserta yang terakhir didaftarkan.</p>
+                    </div>
+
+                    <button class="btn-outline" data-action="data-peserta">
+                        Lihat Semua
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+                <div class="table-responsive">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Nama Peserta</th>
+                                <th>NIK</th>
+                                <th>Nomor HP</th>
+                                <th>Kota/Kabupaten</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="recentParticipants">
+
+                            <tr>
+                                <td colspan="5" class="empty-state">
+                                    <i class="fa-solid fa-folder-open"></i>
+                                    <strong>Belum Ada Data Peserta</strong>
+                                    <span>Data peserta yang ditambahkan akan muncul di sini.</span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             PAGE: TAMBAH PESERTA
+        =============================== -->
+        <section class="page" id="page-tambah-peserta">
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="section-eyebrow">FORMULIR PENDAFTARAN</span>
+                    <h1>Tambah <span>Peserta Baru.</span></h1>
+                    <p>
+                        Lengkapi identitas peserta dan dokumentasi
+                        pelaksanaan misi QRIS.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <form id="participantForm" autocomplete="off">
+
+                <!-- IDENTITAS -->
+                <div class="content-card form-card">
+
+                    <div class="form-section-heading">
+
+                        <div class="form-section-icon">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div>
+                            <h3>Identitas Peserta</h3>
+                            <p>Masukkan informasi pribadi peserta.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group full-width">
+
+                            <label for="nama">
+                                Nama Lengkap
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-user"></i>
+
+                                <input
+                                    type="text"
+                                    id="nama"
+                                    name="nama"
+                                    placeholder="Masukkan nama lengkap peserta"
+                                    maxlength="100"
+                                    required
+                                >
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="nik">
+                                Nomor Induk Kependudukan (NIK)
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-id-card"></i>
+
+                                <input
+                                    type="text"
+                                    id="nik"
+                                    name="nik"
+                                    placeholder="Masukkan 16 digit NIK"
+                                    inputmode="numeric"
+                                    maxlength="16"
+                                    minlength="16"
+                                    pattern="[0-9]{16}"
+                                    required
+                                >
+                            </div>
+
+                            <small>Masukkan NIK sebanyak 16 digit.</small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="nomorHp">
+                                Nomor HP
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-phone"></i>
+
+                                <input
+                                    type="tel"
+                                    id="nomorHp"
+                                    name="nomorHp"
+                                    placeholder="Contoh: 08123456789"
+                                    maxlength="15"
+                                    inputmode="tel"
+                                    required
+                                >
+                            </div>
+
+                        </div>
+                        
+                        <div class="form-group full-width">
+
+                            <label for="kota">
+                                Kota/Kabupaten
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-map-marker-alt"></i>
+
+                                <select
+                                    id="kota"
+                                    name="kota"
+                                    required
+                                >
+                                    <option value="" disabled selected>
+                                        Pilih Kota/Kabupaten
+                                    </option>
+
+                                    <optgroup label="Kota">
+                                        <option value="Kota Pekanbaru">Kota Pekanbaru</option>
+                                        <option value="Kota Dumai">Kota Dumai</option>
+                                    </optgroup>
+
+                                    <optgroup label="Kabupaten">
+                                        <option value="Kabupaten Bengkalis">Kabupaten Bengkalis</option>
+                                        <option value="Kabupaten Indragiri Hilir">Kabupaten Indragiri Hilir</option>
+                                        <option value="Kabupaten Indragiri Hulu">Kabupaten Indragiri Hulu</option>
+                                        <option value="Kabupaten Kampar">Kabupaten Kampar</option>
+                                        <option value="Kabupaten Kepulauan Meranti">Kabupaten Kepulauan Meranti</option>
+                                        <option value="Kabupaten Kuantan Singingi">Kabupaten Kuantan Singingi</option>
+                                        <option value="Kabupaten Pelalawan">Kabupaten Pelalawan</option>
+                                        <option value="Kabupaten Rokan Hilir">Kabupaten Rokan Hilir</option>
+                                        <option value="Kabupaten Rokan Hulu">Kabupaten Rokan Hulu</option>
+                                        <option value="Kabupaten Siak">Kabupaten Siak</option>
+                                    </optgroup>
+
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DOKUMENTASI -->
+                <div class="content-card form-card">
+
+                    <div class="form-section-heading">
+
+                        <div class="form-section-icon">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+
+                        <div>
+                            <h3>Dokumentasi Misi</h3>
+                            <p>
+                                Unggah lima foto sebagai bukti pelaksanaan
+                                kegiatan Petualangan Sanak Digital.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="upload-grid">
+
+                        <!-- FOTO 1 -->
+                        <div class="upload-card">
+
+                            <div class="upload-number">01</div>
+
+                            <div class="upload-content">
+
+                                <div class="upload-icon">
+                                    <i class="fa-solid fa-qrcode"></i>
+                                </div>
+
+                                <h4>Foto Saat Scan QRIS</h4>
+
+                                <p>
+                                    Foto peserta ketika melakukan
+                                    pemindaian QRIS.
+                                </p>
+
+                                <label class="upload-button" for="fotoScan">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    Pilih Foto
+                                </label>
+
+                                <input
+                                    type="file"
+                                    id="fotoScan"
+                                    name="fotoScan"
+                                    accept="image/jpeg,image/png,image/webp"
+                                    data-preview="previewScan"
+                                    required
+                                    hidden
+                                >
+
+                                <div class="upload-preview" id="previewScan"></div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- FOTO 2 -->
+                        <div class="upload-card">
+
+                            <div class="upload-number">02</div>
+
+                            <div class="upload-content">
+
+                                <div class="upload-icon">
+                                    <i class="fa-solid fa-receipt"></i>
+                                </div>
+
+                                <h4>Foto Bersama Bukti Transaksi QRIS</h4>
+
+                                <p>
+                                    Foto peserta bersama bukti transaksi
+                                    QRIS yang berhasil dilakukan.
+                                </p>
+
+                                <label class="upload-button" for="fotoTransaksi">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    Pilih Foto
+                                </label>
+
+                                <input
+                                    type="file"
+                                    id="fotoTransaksi"
+                                    name="fotoTransaksi"
+                                    accept="image/jpeg,image/png,image/webp"
+                                    data-preview="previewTransaksi"
+                                    required
+                                    hidden
+                                >
+
+                                <div class="upload-preview" id="previewTransaksi"></div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- FOTO 3 -->
+                        <div class="upload-card">
+
+                            <div class="upload-number">03</div>
+
+                            <div class="upload-content">
+
+                                <div class="upload-icon">
+                                    <i class="fa-solid fa-chalkboard-user"></i>
+                                </div>
+
+                                <h4>Foto Saat Edukasi Peserta</h4>
+
+                                <p>
+                                    Foto dokumentasi kegiatan edukasi
+                                    kepada peserta.
+                                </p>
+
+                                <label class="upload-button" for="fotoEdukasi">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    Pilih Foto
+                                </label>
+
+                                <input
+                                    type="file"
+                                    id="fotoEdukasi"
+                                    name="fotoEdukasi"
+                                    accept="image/jpeg,image/png,image/webp"
+                                    data-preview="previewEdukasi"
+                                    required
+                                    hidden
+                                >
+
+                                <div class="upload-preview" id="previewEdukasi"></div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- FOTO 4 -->
+                        <div class="upload-card">
+
+                            <div class="upload-number">04</div>
+
+                            <div class="upload-content">
+
+                                <div class="upload-icon">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </div>
+
+                                <h4>Bukti Pengerjaan Post Test</h4>
+
+                                <p>
+                                    Foto bukti peserta ketika sedang
+                                    mengerjakan Post Test.
+                                </p>
+
+                                <label class="upload-button" for="fotoPostTest">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    Pilih Foto
+                                </label>
+
+                                <input
+                                    type="file"
+                                    id="fotoPostTest"
+                                    name="fotoPostTest"
+                                    accept="image/jpeg,image/png,image/webp"
+                                    data-preview="previewPostTest"
+                                    required
+                                    hidden
+                                >
+
+                                <div class="upload-preview" id="previewPostTest"></div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- FOTO 5 -->
+                        <div class="upload-card">
+
+                            <div class="upload-number">05</div>
+
+                            <div class="upload-content">
+
+                                <div class="upload-icon">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </div>
+
+                                <h4>Bukti Selesai Post Test</h4>
+
+                                <p>
+                                    Foto bukti peserta telah
+                                    menyelesaikan Post Test.
+                                </p>
+
+                                <label class="upload-button" for="fotoSelesai">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    Pilih Foto
+                                </label>
+
+                                <input
+                                    type="file"
+                                    id="fotoSelesai"
+                                    name="fotoSelesai"
+                                    accept="image/jpeg,image/png,image/webp"
+                                    data-preview="previewSelesai"
+                                    required
+                                    hidden
+                                >
+
+                                <div class="upload-preview" id="previewSelesai"></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="upload-information">
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <div>
+                            <strong>Informasi Upload</strong>
+                            <p>
+                                Format foto yang didukung adalah JPG,
+                                JPEG, PNG, dan WEBP. Pastikan foto jelas
+                                dan sesuai dengan dokumentasi kegiatan.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+                <div class="content-card form-submit-card">
+
+                    <div class="submit-description">
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        <div>
+                            <strong>Periksa Kembali Data Peserta</strong>
+                            <p>
+                                Pastikan seluruh informasi dan dokumentasi
+                                sudah benar sebelum disimpan.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="submit-actions">
+
+                        <button
+                            type="reset"
+                            class="btn-outline"
+                            id="resetForm"
+                        >
+                            <i class="fa-solid fa-rotate-left"></i>
+                            Reset Formulir
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="btn-primary"
+                            id="submitButton"
+                        >
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            Simpan Data Peserta
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- ==============================
+             PAGE: DATA PESERTA
+        =============================== -->
+        <section class="page" id="page-data-peserta">
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="section-eyebrow">DATABASE PESERTA</span>
+                    <h1>Data <span>Peserta.</span></h1>
+                    <p>
+                        Lihat dan kelola seluruh data peserta
+                        Petualangan Sanak Digital.
+                    </p>
+                </div>
+
+                <button class="btn-primary" data-action="tambah-peserta">
+                    <i class="fa-solid fa-plus"></i>
+                    Tambah Peserta
+                </button>
+
+            </div>
+
+
+            <div class="content-card">
+
+                <div class="data-toolbar">
+
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="search"
+                            id="searchParticipant"
+                            placeholder="Cari nama atau NIK peserta..."
+                        >
+                    </div>
+
+                    <button class="btn-outline" id="refreshData">
+                        <i class="fa-solid fa-rotate"></i>
+                        Refresh Data
+                    </button>
+
+                </div>
+
+
+                <div class="table-responsive">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Nama Peserta</th>
+                                <th>NIK</th>
+                                <th>Nomor HP</th>
+                                <th>Kota/Kabupaten</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="participantTable">
+
+                            <tr>
+                                <td colspan="7" class="empty-state">
+                                    <i class="fa-solid fa-database"></i>
+                                    <strong>Belum Ada Data</strong>
+                                    <span>Data peserta akan ditampilkan di sini.</span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             PAGE: TENTANG APLIKASI
+        =============================== -->
+        <section class="page" id="page-tentang">
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="section-eyebrow">INFORMASI APLIKASI</span>
+                    <h1>Tentang <span>Aplikasi.</span></h1>
+                    <p>Informasi Petualangan Sanak Digital – Tim Bedelau.</p>
+                </div>
+
+            </div>
+
+
+            <div class="content-card about-card">
+
+                <div class="about-logo">
+                    <i class="fa-solid fa-landmark"></i>
+                </div>
+
+                <h2>Petualangan Sanak Digital</h2>
+
+                <span class="about-team">TIM BEDELAU</span>
+
+                <p>
+                    Aplikasi ini dikembangkan sebagai sarana pendataan
+                    peserta dan dokumentasi pelaksanaan misi
+                    Petualangan Sanak Digital yang diselenggarakan
+                    oleh Bank Indonesia Provinsi Riau.
+                </p>
+
+                <div class="about-divider"></div>
+
+                <div class="about-footer">
+                    <i class="fa-solid fa-building-columns"></i>
+                    BANK INDONESIA PROVINSI RIAU
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="main-footer">
+
+            <div>
+                <strong>Petualangan Sanak Digital</strong>
+                <span> · Tim Bedelau</span>
+            </div>
+
+            <span>Bank Indonesia Provinsi Riau</span>
+
+        </footer>
+
+    </main>
+
+
+    <!-- ==============================
+         NOTIFICATION
+    =============================== -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+
+    <!-- ==============================
+         LOADING OVERLAY
+    =============================== -->
+    <div class="loading-overlay" id="loadingOverlay">
+
+        <div class="loading-box">
+
+            <div class="loading-spinner"></div>
+
+            <h3>Menyimpan Data...</h3>
+
+            <p>Mohon tunggu, data peserta sedang diproses.</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+</html>
