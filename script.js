@@ -1104,6 +1104,195 @@ function renderParticipants() {
 
 }
 
+/* ==================================================
+   21A. DETAIL PESERTA
+   Menampilkan informasi lengkap peserta
+================================================== */
+
+function showParticipantDetail(participantId) {
+    const participant = state.participants.find(
+        item => String(item.id) === String(participantId)
+    );
+
+    if (!participant) {
+        showToast("Data peserta tidak ditemukan. Silakan refresh data.", "error");
+        return;
+    }
+
+    // Buat modal jika belum tersedia
+    let modal = document.getElementById("participantDetailModal");
+
+    if (!modal) {
+        modal = document.createElement("div");
+        modal.id = "participantDetailModal";
+        modal.className = "detail-modal";
+
+        document.body.appendChild(modal);
+    }
+
+    const statusClass = participant.status === "Lengkap"
+        ? "complete"
+        : "incomplete";
+
+    modal.innerHTML = `
+        <div class="detail-modal-content">
+
+            <div class="detail-modal-header">
+                <div>
+                    <span class="detail-subtitle">INFORMASI PESERTA</span>
+                    <h2>Detail Peserta</h2>
+                </div>
+
+                <button
+                    type="button"
+                    class="detail-close"
+                    aria-label="Tutup detail"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="detail-modal-body">
+
+                <div class="detail-profile">
+                    <div class="detail-avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div>
+                        <h3>${escapeHTML(participant.nama || "-")}</h3>
+                        <span class="status-label ${statusClass}">
+                            ${escapeHTML(participant.status || "Belum Lengkap")}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Identitas Peserta</h4>
+
+                    <div class="detail-information">
+                        <div class="detail-item">
+                            <span>Nama Peserta</span>
+                            <strong>${escapeHTML(participant.nama || "-")}</strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <span>Nomor Induk Kependudukan (NIK)</span>
+                            <strong class="detail-nik">
+                                ${escapeHTML(participant.nik || "-")}
+                            </strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <span>Nomor HP</span>
+                            <strong>${escapeHTML(participant.nomorHp || "-")}</strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <span>Kota/Kabupaten</span>
+                            <strong>${escapeHTML(participant.kota || "-")}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Dokumentasi</h4>
+
+                    <div class="detail-information">
+                        <div class="detail-item">
+                            <span>Status Dokumentasi</span>
+                            <strong>${escapeHTML(participant.status || "-")}</strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <span>Jumlah Foto</span>
+                            <strong>${formatNumber(participant.jumlahFoto || 0)} / 5 Foto</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Waktu Pendataan</h4>
+
+                    <div class="detail-item">
+                        <span>Tanggal dan Waktu</span>
+                        <strong>${escapeHTML(formatDate(participant.timestamp))}</strong>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="detail-modal-footer">
+                <button type="button" class="btn-primary detail-close">
+                    <i class="fa-solid fa-check"></i>
+                    Tutup
+                </button>
+            </div>
+
+        </div>
+    `;
+
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+
+/* ==================================================
+   EVENT LISTENER TOMBOL DETAIL
+   Menggunakan event delegation
+================================================== */
+
+document.addEventListener("click", function(event) {
+
+    // Tombol Detail
+    const detailButton = event.target.closest(".detail-button");
+
+    if (detailButton) {
+        const participantId = detailButton.dataset.participantId;
+
+        if (!participantId) {
+            showToast("ID peserta tidak ditemukan.", "error");
+            return;
+        }
+
+        showParticipantDetail(participantId);
+        return;
+    }
+
+    // Tombol tutup atau klik area luar modal
+    const modal = document.getElementById("participantDetailModal");
+
+    if (!modal || !modal.classList.contains("active")) {
+        return;
+    }
+
+    if (
+        event.target.closest(".detail-close") ||
+        event.target === modal
+    ) {
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+});
+
+
+/* ==================================================
+   TUTUP MODAL DENGAN TOMBOL ESCAPE
+================================================== */
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key !== "Escape") return;
+
+    const modal = document.getElementById("participantDetailModal");
+
+    if (modal) {
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+});
 
 /* =========================================
    22. PENCARIAN PESERTA
