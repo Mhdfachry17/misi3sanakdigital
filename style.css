@@ -1665,3 +1665,253 @@ input:focus-visible {
     }
 
 }
+
+/* ==================================================
+   MODAL DETAIL PESERTA
+================================================== */
+
+.detail-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.detail-modal.active {
+    display: flex;
+}
+
+.detail-modal-content {
+    width: 100%;
+    max-width: 550px;
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: var(--white);
+    border-radius: 16px;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+
+    animation: detailModalShow 0.25s ease;
+}
+
+@keyframes detailModalShow {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.detail-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 22px 24px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.detail-subtitle {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--primary);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.detail-modal-header h2 {
+    margin: 0;
+
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.detail-close {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #f3f4f6;
+    color: #555555;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.detail-close:hover {
+    background: #fee2e2;
+    color: var(--primary);
+}
+
+.detail-modal-body {
+    padding: 24px;
+}
+
+.detail-profile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding-bottom: 22px;
+    margin-bottom: 22px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.detail-avatar {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #fee2e2;
+    color: var(--primary);
+
+    font-size: 21px;
+}
+
+.detail-profile h3 {
+    margin: 0 0 8px;
+
+    color: var(--text);
+    font-size: 16px;
+}
+
+.detail-section {
+    margin-bottom: 24px;
+}
+
+.detail-section h4 {
+    margin: 0 0 14px;
+
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.detail-information {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.detail-item {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    padding: 13px;
+
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+
+    background: #fafafa;
+}
+
+.detail-item span {
+    color: #888888;
+    font-size: 11px;
+}
+
+.detail-item strong {
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.detail-item .detail-nik {
+    color: var(--primary);
+    letter-spacing: 0.5px;
+}
+
+.detail-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 16px 24px;
+
+    border-top: 1px solid #eeeeee;
+}
+
+.detail-modal-footer button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 11px 20px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: var(--primary);
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.detail-modal-footer button:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 480px) {
+    .detail-modal {
+        padding: 12px;
+    }
+
+    .detail-modal-content {
+        max-height: 92vh;
+        border-radius: 12px;
+    }
+
+    .detail-modal-header,
+    .detail-modal-body {
+        padding: 18px;
+    }
+
+    .detail-information {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-modal-footer {
+        padding: 14px 18px;
+    }
+}
