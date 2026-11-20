@@ -1,4 +1,3 @@
-
 /* =========================================
    PETUALANGAN SANAK DIGITAL
    TIM BEDELAU - BANK INDONESIA RIAU
@@ -15,7 +14,7 @@
 ========================================= */
 
 const CONFIG = {
-    API_URL: "https://script.google.com/macros/s/AKfycbzwJpK2bRKf6Ko4h_36v3wQ2FNZA_TSdKoc2KXJ5n1p7vusGk_Q7ibrnFEoLqrdZkfw/exec",
+    API_URL: "https://script.google.com/macros/s/AKfycbwzjIXks6nQy9LXgWysf7G_rsW8uSk9KKPsrY-MGv9p5a4Cg2zwoNbLaTyJXe1IwZCL/exec",
 
     MAX_FILE_SIZE: 10 * 1024 * 1024, // 10 MB sebelum kompresi
     MAX_IMAGE_SIZE: 1600,
@@ -105,6 +104,12 @@ const PHOTO_FIELDS = [
         preview: "previewSelesai",
         label: "Bukti Selesai Post Test",
         key: "fotoSelesai"
+    },
+    {
+        id: "fotoKTP",
+        preview: "previewKTP",
+        label: "Foto Bagian Atas KTP",
+        key: "fotoKTP"
     }
 ];
 
@@ -781,10 +786,10 @@ async function handleFormSubmit(event) {
         // 1. Validasi identitas
         const participant = validateForm();
 
-        // 2. Kompresi dan kumpulkan lima foto
+        // 2. Kompresi dan kumpulkan enam foto
         setLoading(
             true,
-            "Memeriksa dan mengompres lima foto dokumentasi..."
+            "Memeriksa dan mengompres enam foto dokumentasi..."
         );
 
         const photos = await collectPhotos();
@@ -1206,7 +1211,7 @@ function showParticipantDetail(participantId) {
 
                         <div class="detail-item">
                             <span>Jumlah Foto</span>
-                            <strong>${formatNumber(participant.jumlahFoto || 0)} / 5 Foto</strong>
+                            <strong>${formatNumber(participant.jumlahFoto || 0)} / 6 Foto</strong>
                         </div>
                     </div>
                 </div>
